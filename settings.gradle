@@ -1,2 +1,0 @@
-include ':app'
-rootProject.name = "Kirby_Assistant_New"
