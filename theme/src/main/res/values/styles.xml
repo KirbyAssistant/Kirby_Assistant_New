@@ -1,0 +1,205 @@
+<resources>
+
+    <declare-styleable name="nocropper__CropperView">
+        <attr name="nocropper__grid_color" format="color"/>
+        <attr name="nocropper__grid_thickness" format="dimension"/>
+        <attr name="nocropper__grid_opacity" format="float"/>
+        <attr name="nocropper__padding_color" format="color"/>
+        <attr name="nocropper__add_padding_to_make_square" format="boolean"/>
+        <attr name="nocropper__fit_to_center" format="boolean"/>
+    </declare-styleable>
+
+    <style name="OMGDialogStyle">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowSoftInputMode">adjustPan</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="BaseLightTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="color_view_background">@android:color/white</item>
+        <item name="color_windows_background">#FFF5F5F5</item>
+        <item name="text_high">@color/light_text_high</item>
+        <item name="text_medium">@color/light_text_medium</item>
+        <item name="text_hint">@color/light_text_hint</item>
+        <item name="text_error">@color/light_text_error</item>
+        <item name="btn_text_color">@color/light_btn_text_color</item>
+        <item name="icon_color">#FF202020</item>
+        <item name="toolbar_theme">@style/Widget.MaterialComponents.Toolbar.Primary</item>
+        <item name="toolbar_icon_color">#FFFEFEFE</item>
+        <item name="floatingActionButtonStyle">@style/Widget.MaterialComponents.FloatingActionButton</item>
+        <item name="android:textColorSecondary">?attr/text_medium</item>
+        <item name="android:textColorPrimary">?attr/text_high</item>
+        <item name="alertDialogTheme">@style/LightAlertDialog</item>
+    </style>
+
+    <style name="TransperantToolbar" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="windowActionBarOverlay">true</item>
+    </style>
+
+    <style name="BaseDarkTheme" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:windowBackground">#FF000000</item>
+        <item name="color_view_background">#FF121212</item>
+        <item name="color_windows_background">#FF000000</item>
+        <item name="text_high">@color/dark_text_high</item>
+        <item name="text_medium">@color/dark_text_medium</item>
+        <item name="text_hint">@color/dark_text_hint</item>
+        <item name="text_error">@color/dark_text_error</item>
+        <item name="btn_text_color">@color/dark_btn_text_color</item>
+        <item name="icon_color">#FFF5F5F5</item>
+        <item name="toolbar_theme">@style/Widget.MaterialComponents.Toolbar.Primary</item>
+        <item name="toolbar_icon_color">#FFFEFEFE</item>
+        <item name="floatingActionButtonStyle">@style/Widget.MaterialComponents.FloatingActionButton</item>
+        <item name="android:textColorSecondary">?attr/text_medium</item>
+        <item name="android:textColorPrimary">?attr/text_high</item>
+        <item name="alertDialogTheme">@style/DarkAlertDialog</item>
+    </style>
+
+    <style name="BlueAppTheme" parent="BaseLightTheme">
+        <item name="colorPrimary">@color/blueColorPrimary</item>
+        <item name="colorPrimaryDark">@color/blueColorPrimaryDark</item>
+        <item name="colorAccent">@color/blueColorAccent</item>
+        <item name="color_nav">@color/blueColorPrimary</item>
+        <item name="dialog_button_color">@color/blueColorAccent</item>
+    </style>
+
+    <style name="RedAppTheme" parent="BaseLightTheme">
+        <item name="colorPrimary">@color/redColorPrimary</item>
+        <item name="colorPrimaryDark">@color/redColorPrimaryDark</item>
+        <item name="colorAccent">@color/redColorAccent</item>
+        <item name="color_nav">@color/redColorPrimary</item>
+        <item name="dialog_button_color">@color/redColorAccent</item>
+    </style>
+
+    <style name="PurpleAppTheme" parent="BaseLightTheme">
+        <item name="colorPrimary">@color/purpleColorPrimary</item>
+        <item name="colorPrimaryDark">@color/purpleColorPrimaryDark</item>
+        <item name="colorAccent">@color/purpleColorAccent</item>
+        <item name="color_nav">@color/purpleColorPrimary</item>
+        <item name="dialog_button_color">@color/purpleColorAccent</item>
+    </style>
+
+    <style name="IndigoAppTheme" parent="BaseLightTheme">
+        <item name="colorPrimary">@color/indigoColorPrimary</item>
+        <item name="colorPrimaryDark">@color/indigoColorPrimaryDark</item>
+        <item name="colorAccent">@color/indigoColorAccent</item>
+        <item name="color_nav">@color/indigoColorPrimary</item>
+        <item name="dialog_button_color">@color/indigoColorAccent</item>
+    </style>
+
+    <style name="TealAppTheme" parent="BaseLightTheme">
+        <item name="colorPrimary">@color/tealColorPrimary</item>
+        <item name="colorPrimaryDark">@color/tealColorPrimaryDark</item>
+        <item name="colorAccent">@color/tealColorAccent</item>
+        <item name="color_nav">@color/tealColorPrimary</item>
+        <item name="dialog_button_color">@color/tealColorAccent</item>
+    </style>
+
+    <style name="GreenAppTheme" parent="BaseLightTheme">
+        <item name="colorPrimary">@color/greenColorPrimary</item>
+        <item name="colorPrimaryDark">@color/greenColorPrimaryDark</item>
+        <item name="colorAccent">@color/greenColorAccent</item>
+        <item name="color_nav">@color/greenColorPrimary</item>
+        <item name="dialog_button_color">@color/greenColorAccent</item>
+    </style>
+
+    <style name="OrangeAppTheme" parent="BaseLightTheme">
+        <item name="colorPrimary">@color/orangeColorPrimary</item>
+        <item name="colorPrimaryDark">@color/orangeColorPrimaryDark</item>
+        <item name="colorAccent">@color/orangeColorAccent</item>
+        <item name="color_nav">@color/orangeColorPrimary</item>
+        <item name="dialog_button_color">@color/orangeColorAccent</item>
+    </style>
+
+    <style name="BrownAppTheme" parent="BaseLightTheme">
+        <item name="colorPrimary">@color/brownColorPrimary</item>
+        <item name="colorPrimaryDark">@color/brownColorPrimaryDark</item>
+        <item name="colorAccent">@color/brownColorAccent</item>
+        <item name="color_nav">@color/brownColorPrimary</item>
+        <item name="dialog_button_color">@color/brownColorAccent</item>
+    </style>
+
+    <style name="BlueGreyAppTheme" parent="BaseLightTheme">
+        <item name="colorPrimary">@color/blueGreyColorPrimary</item>
+        <item name="colorPrimaryDark">@color/blueGreyColorPrimaryDark</item>
+        <item name="colorAccent">@color/blueGreyColorAccent</item>
+        <item name="color_nav">@color/blueGreyColorAccent</item>
+        <item name="dialog_button_color">@color/blueGreyColorAccent</item>
+    </style>
+
+    <style name="YellowAppTheme" parent="BaseLightTheme">
+        <item name="colorPrimary">@color/yellowColorPrimary</item>
+        <item name="colorPrimaryDark">@color/yellowColorPrimaryDark</item>
+        <item name="colorAccent">@color/yellowColorAccent</item>
+        <item name="color_nav">@color/yellowColorPrimary</item>
+        <item name="dialog_button_color">@color/yellowColorAccent</item>
+    </style>
+
+    <style name="DarkAppTheme" parent="BaseDarkTheme">
+        <item name="colorPrimary">@color/darkColorPrimary</item>
+        <item name="colorPrimaryDark">@color/darkColorPrimaryDark</item>
+        <item name="colorAccent">@color/darkColorAccent</item>
+        <item name="color_nav">@color/darkColorAccent</item>
+        <item name="dialog_button_color">@color/darkColorAccent</item>
+    </style>
+
+    <style name="PinkAppTheme" parent="BaseLightTheme">
+        <item name="colorPrimary">@color/pinkColorPrimary</item>
+        <item name="colorPrimaryDark">@color/pinkColorPrimaryDark</item>
+        <item name="colorAccent">@color/pinkColorAccent</item>
+        <item name="color_nav">@color/pinkColorPrimary</item>
+        <item name="dialog_button_color">@color/pinkColorAccent</item>
+    </style>
+
+    <style name="WhiteAppTheme" parent="BaseLightTheme">
+        <item name="color_windows_background">@color/whiteColorPrimary</item>
+        <item name="colorPrimary">@color/whiteColorPrimary</item>
+        <item name="colorPrimaryDark">@color/whiteColorPrimary</item>
+        <item name="colorAccent">@color/whiteColorAccent</item>
+        <item name="color_nav">@color/whiteColorAccent</item>
+        <item name="btn_text_color">@color/white_btn_text_color</item>
+        <item name="toolbar_theme">@style/Widget.MaterialComponents.Toolbar.Surface</item>
+        <item name="toolbar_icon_color">#FF606060</item>
+        <item name="dialog_button_color">@color/whiteColorAccent</item>
+        <item name="android:textColorSecondary">?attr/text_medium</item>
+        <item name="android:textColorPrimary">?attr/text_high</item>
+    </style>
+
+    <style name="LightAlertDialog" parent="Theme.MaterialComponents.Light.Dialog.Alert">
+        <item name="buttonBarButtonStyle">@style/DialogTextButton</item>
+    </style>
+
+    <style name="DarkAlertDialog" parent="Theme.MaterialComponents.Dialog.Alert">
+        <item name="buttonBarButtonStyle">@style/DialogTextButton</item>
+    </style>
+
+    <style name="DialogTextButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog.Flush">
+        <item name="android:textColor">?attr/dialog_button_color</item>
+        <item name="rippleColor">?attr/dialog_button_color</item>
+    </style>
+
+    <style name="MD_Dialog_Input_Layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="boxBackgroundColor">@android:color/transparent</item>
+        <item name="boxStrokeColor">?attr/colorAccent</item>
+        <item name="android:textColorHint">?attr/text_hint</item>
+        <item name="hintTextColor">?attr/colorAccent</item>
+        <item name="android:textCursorDrawable">@drawable/cursor_color</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="MD_Dialog_Input_Layout.Message">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">?attr/text_high</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColorHint">?attr/colorAccent</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+</resources>

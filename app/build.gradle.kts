@@ -47,4 +47,7 @@ dependencies {
     testImplementation("junit:junit:4.13.1")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
+    implementation(project(":base"))
+    implementation(project(":ktx"))
+    implementation(project(":util"))
 }
