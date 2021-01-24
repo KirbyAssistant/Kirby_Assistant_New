@@ -4,23 +4,42 @@ import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
+import androidx.annotation.StringRes
+import androidx.lifecycle.ViewModel
+import androidx.viewbinding.ViewBinding
 import ren.imyan.language.ContextWrapper.Companion.wrap
 import ren.imyan.language.LanguageUtil
 import ren.imyan.theme.ThemeManager
 
-open class BaseUIActivity : BaseActivity() {
+abstract class BaseUIActivity<T : ViewBinding, B : ViewModel> : BaseActivity() {
+
+    private var _binding: T? = null
+    private var _viewModel: B? = null
+
+    val binding get() = _binding!!
+    val viewModel get() = _viewModel!!
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ThemeManager(this).setAppTheme()
+        getThemeManager().setAppTheme()
+        _binding = initBinding()
+        _viewModel = initViewModel()
     }
 
-    //    companion object {
-//        /**
-//         * 静态启动 MainActivity 的方法
-//         * @param context 启动的上下文
-//         */
-//        abstract fun actionStart(context: Context);
-//    }
+    abstract fun initViewModel(): B
+
+    abstract fun initBinding(): T
+
+    fun setToolBarTitle(@StringRes titleId: Int) {
+        supportActionBar?.setTitle(titleId);
+    }
+
+    fun setToolBarTitle(title: CharSequence) {
+        supportActionBar?.title = title;
+    }
+
+    fun getThemeManager() : ThemeManager = ThemeManager(this)
+
     @RequiresApi(Build.VERSION_CODES.N)
     override fun attachBaseContext(newBase: Context?) {
         //如果不使用工具类也可以在这里处理好 Locale 传入

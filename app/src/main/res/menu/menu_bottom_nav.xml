@@ -2,22 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/res"
-        android:icon="@android:drawable/dark_header"
-        android:title="测试1"/>
+        android:icon="@drawable/ic_kirby_res"
+        android:title="@string/title_res"/>
 
     <item
         android:id="@+id/video"
-        android:icon="@android:drawable/dark_header"
-        android:title="测试2"/>
+        android:icon="@drawable/ic_kirby_video"
+        android:title="@string/title_video"/>
 
     <item
         android:id="@+id/chat"
-        android:icon="@android:drawable/dark_header"
-        android:title="测试3"/>
+        android:icon="@drawable/ic_kirby_chat"
+        android:title="@string/title_chat"/>
 
     <item
         android:id="@+id/me"
-        android:icon="@android:drawable/dark_header"
-        android:title="测试4"/>
+        android:icon="@drawable/ic_kirby_account"
+        android:title="@string/title_me"/>
 
 </menu>

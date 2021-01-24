@@ -7,7 +7,24 @@
     app:consumeSystemWindowsInsets="start|end"
     app:edgeToEdge="true"
     app:fitsSystemWindowsInsets="start|end"
-    tools:context=".ui.MainActivity">
+    tools:context=".ui.mainpage.MainActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/app_bar">
+
+        <include
+            android:id="@+id/toolbar_layout"
+            layout="@layout/layout_toolbar"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ren.imyan.kirby.view.NoScrollViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/main_fragment_viewpager"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/main_bottom_bar"

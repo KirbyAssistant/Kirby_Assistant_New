@@ -12,12 +12,16 @@ object ActivityCollector {
 
     private val activities = Stack<Activity>()
 
+    @JvmStatic
     fun addActivity(activity: Activity) = activities.add(activity)
 
+    @JvmStatic
     fun removeActivity(activity: Activity) = activities.remove(activity)
 
+    @JvmStatic
     fun currActivity(): Activity = activities.lastElement()
 
+    @JvmStatic
     fun finishByName(cls: Activity?) {
         val activityList: MutableList<Activity> = ArrayList()
         for (activity in activities) {
@@ -31,6 +35,7 @@ object ActivityCollector {
         }
     }
 
+    @JvmStatic
     fun finishAll() {
         for (activity in activities) {
             if (!activity.isFinishing) {

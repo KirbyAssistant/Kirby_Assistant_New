@@ -2,6 +2,7 @@ package ren.imyan.kirby.ui
 
 import android.os.Bundle
 import ren.imyan.base.BaseActivity
+import ren.imyan.kirby.ui.mainpage.MainActivity
 
 /**
  * @author EndureBlaze/炎忍 https://github.com.EndureBlaze
