@@ -2,44 +2,20 @@ package ren.imyan.ktx
 
 import android.content.Context
 import android.widget.Toast
-import androidx.annotation.StringRes
 
 /**
  * @author EndureBlaze/炎忍 https://github.com.EndureBlaze
  * @data 2020-12-05 16:08
  * @website https://imyan.ren
  */
-
-fun Context.toast(content: String, duration: Int = Toast.LENGTH_SHORT) {
-    Toast.makeText(this, content, duration).apply {
-        show()
-    }
+fun toast(context: Context, string: String, duration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(context, string, duration).show()
 }
 
-fun Context.toast(@StringRes id: Int, duration: Int = Toast.LENGTH_SHORT) {
-    toast(getString(id), duration)
+fun String.toast(context: Context, duration: Int = Toast.LENGTH_SHORT) {
+    toast(context, this, duration)
 }
 
-fun Context.longToast(content: String) {
-    toast(content, Toast.LENGTH_LONG)
-}
-
-fun Context.longToast(@StringRes id: Int) {
-    toast(id, Toast.LENGTH_LONG)
-}
-
-fun Any.toast(context: Context, content: String, duration: Int = Toast.LENGTH_SHORT) {
-    context.toast(content, duration)
-}
-
-fun Any.toast(context: Context, @StringRes id: Int, duration: Int = Toast.LENGTH_SHORT) {
-    context.toast(id, duration)
-}
-
-fun Any.longToast(context: Context, content: String) {
-    context.longToast(content)
-}
-
-fun Any.longToast(context: Context, @StringRes id: Int) {
-    context.longToast(id)
+fun Number.toast(context: Context, duration: Int = Toast.LENGTH_SHORT) {
+    toast(context, this.toString(), duration)
 }

@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  * @website https://imyan.ren
  */
 object ServiceCreator {
-    private const val BASE_URL = "https://api.imyan.ren/ka/"
+    private const val BASE_URL = "https://api.imyan.ren/ka/data/"
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
