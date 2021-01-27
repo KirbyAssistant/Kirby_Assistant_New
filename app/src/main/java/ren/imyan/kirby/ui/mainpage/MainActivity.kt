@@ -5,8 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import ren.imyan.base.BaseUIActivity
 import ren.imyan.base.startActivity
 import ren.imyan.kirby.R
@@ -21,7 +21,7 @@ class MainActivity : BaseUIActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     override fun initViewModel(): MainViewModel =
-        ViewModelProvider(this).get(MainViewModel::class.java)
+        ViewModelProvider(this)[MainViewModel::class.java]
 
     override fun initBinding(): ActivityMainBinding =
         ActivityMainBinding.inflate(layoutInflater)
@@ -38,13 +38,13 @@ class MainActivity : BaseUIActivity<ActivityMainBinding, MainViewModel>() {
         setToolBarTitle(R.string.app_name)
     }
 
-    private fun initFragmentPager(){
+    private fun initFragmentPager() {
         binding.mainFragmentViewpager.adapter = ViewPagerAdapter(
             supportFragmentManager,
-            FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
+            lifecycle,
             viewModel.fragmentList
         )
-        binding.mainFragmentViewpager.setScroll(false)
+        binding.mainFragmentViewpager.isUserInputEnabled = false
         binding.mainFragmentViewpager.offscreenPageLimit = 3
     }
 
@@ -54,7 +54,7 @@ class MainActivity : BaseUIActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             R.id.theme -> getThemeManager().showSwitchDialog(::reloadMain)
         }
         return true

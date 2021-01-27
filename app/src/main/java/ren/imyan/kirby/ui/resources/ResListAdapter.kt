@@ -12,6 +12,7 @@ import ren.imyan.base.ActivityCollector
 import ren.imyan.kirby.R
 import ren.imyan.kirby.data.model.ResItem
 import ren.imyan.kirby.databinding.ItemResBinding
+import ren.imyan.kirby.ui.game.GameListActivity
 
 class ResListAdapter(private val resList: List<ResItem>) :
     RecyclerView.Adapter<ResListAdapter.ViewHolder>() {
@@ -58,10 +59,10 @@ class ResListAdapter(private val resList: List<ResItem>) :
         }
 
         holder.linearLayout.setOnClickListener {
-//            when (res.type) {
-//                "console" -> mContext?.let { GameListActivity.actionStart(it, res.tag, res.name) }
-//                "cheatcode" -> CheatCodeActivity.actionStart(mContext!!, res.tag)
-//            }
+            when (res.type) {
+            "console" -> mContext?.let { GameListActivity.actionStart(it, res) }
+//            "cheatcode" -> CheatCodeActivity.actionStart(mContext!!, res.tag)
+        }
         }
     }
 }

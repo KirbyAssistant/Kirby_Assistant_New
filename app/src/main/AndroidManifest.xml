@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Kirby_Assistant_New">
+        <activity android:name=".ui.game.GameListActivity"></activity>
         <activity android:name=".ui.mainpage.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

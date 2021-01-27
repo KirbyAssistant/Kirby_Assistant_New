@@ -3,6 +3,8 @@ import org.jetbrains.kotlin.gradle.plugin.getKotlinPluginVersion
 plugins {
     id("com.android.application")
     kotlin("android")
+    id("kotlin-android")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -53,6 +55,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.0-rc01")
     implementation("com.github.bumptech.glide:glide:4.11.0")
     implementation("com.github.EndureBlaze:GlideCache:1.2")
+    implementation("androidx.activity:activity-ktx:1.1.0")
+    implementation("androidx.fragment:fragment-ktx:1.2.5")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.11.0")
     testImplementation("junit:junit:4.13.1")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
