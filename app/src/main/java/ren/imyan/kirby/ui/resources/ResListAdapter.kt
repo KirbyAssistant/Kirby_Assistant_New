@@ -12,32 +12,25 @@ import ren.imyan.base.ActivityCollector
 import ren.imyan.kirby.R
 import ren.imyan.kirby.data.model.ResItem
 import ren.imyan.kirby.databinding.ItemResBinding
+import ren.imyan.kirby.ui.ResViewHolder
 import ren.imyan.kirby.ui.game.GameListActivity
 
 class ResListAdapter(private val resList: List<ResItem>) :
-    RecyclerView.Adapter<ResListAdapter.ViewHolder>() {
+    RecyclerView.Adapter<ResViewHolder>() {
 
     private var mContext: Context? = null
 
-    inner class ViewHolder(itemResBinding: ItemResBinding) : RecyclerView.ViewHolder(itemResBinding.root) {
-        val itemRes = itemResBinding.root
-        val linearLayout = itemResBinding.LinearLayout
-        val name = itemResBinding.name
-        val image = itemResBinding.image
-        val blurImage = itemResBinding.blurImage
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResViewHolder {
         if (mContext == null) {
             mContext = parent.context
         }
         val itemResBinding = ItemResBinding.inflate(LayoutInflater.from(mContext), parent, false)
-        return ViewHolder(itemResBinding)
+        return ResViewHolder(itemResBinding)
     }
 
     override fun getItemCount(): Int = resList.size
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ResViewHolder, position: Int) {
         val res = resList[position]
         val animation = AnimationUtils.loadAnimation(mContext, R.anim.anim_recycler_item_show)
         val alphaAnimation = AlphaAnimation(0.1f, 1.0f)

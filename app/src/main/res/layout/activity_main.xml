@@ -10,21 +10,23 @@
     tools:context=".ui.mainpage.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        style="@style/WidgetFoundation.Appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/app_bar">
+        app:fitsSystemWindowsInsets="top">
 
         <include
             android:id="@+id/toolbar_layout"
-            layout="@layout/layout_toolbar"/>
+            layout="@layout/layout_toolbar" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/main_fragment_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/main_fragment_viewpager"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/main_bottom_bar"
@@ -52,7 +54,7 @@
             app:itemHorizontalTranslationEnabled="false"
             app:itemRippleColor="?colorPrimary"
             app:labelVisibilityMode="labeled"
-            app:menu="@menu/menu_bottom_nav"/>
+            app:menu="@menu/menu_bottom_nav" />
     </com.google.android.material.card.MaterialCardView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
