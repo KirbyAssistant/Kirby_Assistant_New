@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources translatable="false">
-    <string name="app_name">Kirby Assistant</string>
+<resources xmlns:tools="http://schemas.android.com/tools" translatable="false" tools:ignore="MissingTranslation">
+    <string name="app_name" >Kirby Assistant</string>
     <!--底栏的四个-->
     <!--小标题也要用到-->
     <string name="title_res">资源</string>

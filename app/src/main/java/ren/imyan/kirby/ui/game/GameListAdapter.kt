@@ -1,16 +1,30 @@
 package ren.imyan.kirby.ui.game
 
+import android.Manifest
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
 import android.view.animation.AnimationUtils
+import androidx.activity.ComponentActivity
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.RecyclerView
+import cn.ednureblaze.glidecache.GlideCache
 import com.bumptech.glide.Glide
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import ren.imyan.base.ActivityCollector
 import ren.imyan.kirby.R
+import ren.imyan.kirby.core.currActivity
 import ren.imyan.kirby.data.model.Game
 import ren.imyan.kirby.databinding.ItemResBinding
 import ren.imyan.kirby.ui.ResViewHolder
+import ren.imyan.ktx.saveBitmap2Galley
+import ren.imyan.ktx.toast
 
 /**
  * @author EndureBlaze/炎忍 https://github.com.EndureBlaze
@@ -20,10 +34,18 @@ import ren.imyan.kirby.ui.ResViewHolder
 class GameListAdapter(private val data: List<Game>) :
     RecyclerView.Adapter<ResViewHolder>() {
 
+    companion object {
+        val JP_VERSION =
+            ActivityCollector.currActivity().resources.getString(R.string.dia_jp)
+        val US_VERSION =
+            ActivityCollector.currActivity().resources.getString(R.string.dia_us)
+        val CN_VERSION =
+            ActivityCollector.currActivity().resources.getString(R.string.dia_cn)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResViewHolder {
         val binding = ItemResBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        val holder = ResViewHolder(binding)
-        return holder
+        return ResViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ResViewHolder, position: Int) {
@@ -45,6 +67,57 @@ class GameListAdapter(private val data: List<Game>) :
         Glide.with(ActivityCollector.currActivity())
             .load(ele.image)
             .into(holder.image)
+
+        holder.linearLayout.setOnClickListener {
+            val versionList = ArrayList<String>()
+            for ((key) in ele.downloadLink) {
+                when (key) {
+                    "jp" -> versionList.add(JP_VERSION)
+                    "us" -> versionList.add(US_VERSION)
+                    "cn"
+                    -> versionList.add(CN_VERSION)
+                    else -> versionList.add(key)
+                }
+            }
+            versionList.add("保存封面图片")
+            MaterialAlertDialogBuilder(currActivity)
+                .setTitle(R.string.game_download_game)
+                .setItems(versionList.toArray(arrayOfNulls<CharSequence>(versionList.size))) { dialog, which ->
+                    if (versionList[which] == versionList.last()) {
+                        dialog.dismiss()
+                        (currActivity as GameListActivity).requestPermission.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
+                        (currActivity as GameListActivity).requestPermissionState.observe(
+                            currActivity as GameListActivity
+                        ) {
+                            if (it) {
+                                CoroutineScope(Dispatchers.Main).launch {
+                                    val bitmap = withContext(Dispatchers.IO) {
+                                        GlideCache.getGlideBitmap(currActivity, ele.image)
+                                    }
+                                    if (currActivity.saveBitmap2Galley(
+                                            bitmap,
+                                            "kirbyassistant",
+                                            ele.title
+                                        )
+                                    ) {
+                                        toast(currActivity, "保存成功")
+                                    } else {
+                                    }
+                                }
+                            } else {
+                                toast(currActivity, "未授予权限，无法保存")
+                            }
+                        }
+                    } else {
+                        val intent = Intent(Intent.ACTION_VIEW)
+                        intent.addCategory(Intent.CATEGORY_BROWSABLE)
+                        intent.data =
+                            Uri.parse(ele.downloadLink[ele.downloadLink.keys.toList()[which]])
+                        currActivity.startActivity(intent)
+                    }
+                }.show()
+        }
     }
 
     override fun getItemCount(): Int = data.size

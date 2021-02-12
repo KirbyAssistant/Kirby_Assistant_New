@@ -27,18 +27,16 @@ class GameListViewModel(val res: ResItem) : ViewModel() {
     private val _gameDataState = MutableLiveData<String>()
 
     init {
-        getGameData()
+        getGameData(res.tag)
     }
 
     fun getAgainData(type: String) {
-        when (type) {
-            "gba" -> getGameData()
-        }
+        getGameData(type)
     }
 
-    private fun getGameData() {
+    private fun getGameData(type: String) {
         val gameService = ServiceCreator.create<GameService>()
-        gameService.getGameData(res.tag).enqueue(object : Callback<List<Game>> {
+        gameService.getGameData(type).enqueue(object : Callback<List<Game>> {
 
             override fun onResponse(call: Call<List<Game>>, response: Response<List<Game>>) {
                 _gameData.value = response.body()

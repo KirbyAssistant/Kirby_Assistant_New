@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="ren.imyan.kirby">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
 
     <application
         android:name=".core.App"
@@ -12,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Kirby_Assistant_New">
-        <activity android:name=".ui.game.GameListActivity"></activity>
+        <activity android:name=".ui.game.GameListActivity" />
         <activity android:name=".ui.mainpage.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
