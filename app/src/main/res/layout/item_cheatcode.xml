@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="cheatcode"
+            type="ren.imyan.kirby.data.model.CheatCode" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginStart="@dimen/card_margin_horizontal_big_activity"
+        android:layout_marginTop="@dimen/card_margin_vertical_big_activity"
+        android:layout_marginEnd="@dimen/card_margin_horizontal_big_activity"
+        android:layout_marginBottom="@dimen/card_margin_vertical_big_activity"
+        android:foreground="?attr/selectableItemBackground"
+        android:transitionName="card"
+        app:cardBackgroundColor="?attr/color_view_background"
+        app:cardElevation="0dp"
+        app:strokeColor="@color/stroke_color"
+        app:strokeWidth="1dp">
+
+        <LinearLayout
+            android:id="@+id/LinearLayout"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:onClick="@{()->cheatcode.copy(cheatcode.code)}"
+            android:orientation="horizontal"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp">
+
+            <TextView
+                android:id="@+id/info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|end"
+                android:layout_margin="8dp"
+                android:layout_weight="5"
+                android:padding="4dp"
+                android:text="@{cheatcode.info}"
+                android:textColor="?attr/text_high"
+                android:textSize="16sp"
+                android:transitionName="name"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/code"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|end"
+                android:layout_margin="8dp"
+                android:layout_weight="5"
+                android:padding="4dp"
+                android:text="@{cheatcode.code}"
+                android:textColor="?attr/text_high"
+                android:textSize="16sp"
+                android:transitionName="name"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

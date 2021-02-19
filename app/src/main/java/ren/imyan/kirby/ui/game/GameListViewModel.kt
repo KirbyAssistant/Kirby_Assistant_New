@@ -49,9 +49,3 @@ class GameListViewModel(val res: ResItem) : ViewModel() {
         })
     }
 }
-
-class GameListViewModelFactory(private val res: ResItem?) : ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return res?.let { GameListViewModel(it) } as T
-    }
-}

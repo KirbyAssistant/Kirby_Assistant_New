@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewTreeObserver
+import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.lifecycle.ViewModelProvider
 import ren.imyan.base.BaseUIActivity
@@ -30,17 +31,13 @@ class MainActivity : BaseUIActivity<ActivityMainBinding, MainViewModel>() {
     override fun initBinding(): ActivityMainBinding =
         ActivityMainBinding.inflate(layoutInflater)
 
+
+    override fun initToolbar(): Pair<Toolbar, *> = Pair(binding.toolbarLayout.toolbar,R.string.app_name)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initToolBar()
         initFragmentPager()
-
         requestNavigationHidden()
-    }
-
-    private fun initToolBar() {
-        setSupportActionBar(binding.toolbarLayout.toolbar)
-        setToolBarTitle(R.string.app_name)
     }
 
     private fun initFragmentPager() {

@@ -12,6 +12,7 @@ import ren.imyan.base.BaseFragment
 import ren.imyan.kirby.data.model.ResItem
 import ren.imyan.kirby.databinding.FragmentResBinding
 import ren.imyan.kirby.databinding.ViewpagerResBinding
+import ren.imyan.kirby.ui.resources.pager.CheatCodeGameFragment
 import ren.imyan.kirby.ui.resources.pager.ConsoleFragment
 import ren.imyan.kirby.ui.resources.pager.EmulatorFragment
 
@@ -37,7 +38,7 @@ class ResFragment : BaseFragment<FragmentResBinding, ResViewModel>() {
             listOf(
                 ConsoleFragment(),
                 EmulatorFragment(),
-                ConsoleFragment()
+                CheatCodeGameFragment()
             )
         )
 

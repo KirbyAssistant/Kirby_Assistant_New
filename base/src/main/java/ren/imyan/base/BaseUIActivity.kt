@@ -1,15 +1,11 @@
 package ren.imyan.base
 
 import android.content.Context
-import android.content.res.Resources
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.view.View
-import android.view.Window
-import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModel
 import androidx.viewbinding.ViewBinding
 import ren.imyan.language.ContextWrapper.Companion.wrap
@@ -17,17 +13,22 @@ import ren.imyan.language.LanguageUtil
 import ren.imyan.theme.ThemeManager
 
 
-abstract class BaseUIActivity<T : ViewBinding, B : ViewModel> : BaseActivity() {
+abstract class BaseUIActivity<viewBinding : ViewBinding, viewModel : ViewModel> : BaseActivity() {
 
-    private var _binding: T? = null
-    private var _viewModel: B? = null
-    private var isSet = true
+    private var _binding: viewBinding? = null
+    private var _viewModel: viewModel? = null
+    private var isSetView = true
+    private var isSetToolbar = true
 
     val binding get() = _binding!!
     val viewModel get() = _viewModel!!
 
-    fun dotSetView() {
-        this.isSet = false
+    fun notSetView() {
+        isSetView = false
+    }
+
+    fun notSetToolbar() {
+        isSetToolbar = false
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,8 +36,15 @@ abstract class BaseUIActivity<T : ViewBinding, B : ViewModel> : BaseActivity() {
         getThemeManager().setAppTheme()
         _binding = initBinding()
         _viewModel = initViewModel()
-        if (isSet) {
+        if (isSetView) {
             setContentView(binding.root)
+        }
+        if (isSetToolbar) {
+            setSupportActionBar(initToolbar().first)
+            when (val title = initToolbar().second) {
+                is String -> setToolBarTitle(title)
+                is Int -> setToolBarTitle(title)
+            }
         }
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //            window?.decorView?.let {
@@ -63,9 +71,11 @@ abstract class BaseUIActivity<T : ViewBinding, B : ViewModel> : BaseActivity() {
 //        }
     }
 
-    abstract fun initViewModel(): B
+    abstract fun initViewModel(): viewModel
 
-    abstract fun initBinding(): T
+    abstract fun initBinding(): viewBinding
+
+    abstract fun initToolbar(): Pair<Toolbar, *>
 
     fun setToolBarTitle(@StringRes titleId: Int) {
         supportActionBar?.setTitle(titleId);

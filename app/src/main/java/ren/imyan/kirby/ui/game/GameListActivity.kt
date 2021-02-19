@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import ren.imyan.base.BaseUIActivity
@@ -12,10 +13,7 @@ import ren.imyan.kirby.R
 import ren.imyan.kirby.data.model.Game
 import ren.imyan.kirby.data.model.ResItem
 import ren.imyan.kirby.databinding.ActivityGameListBinding
-import ren.imyan.kirby.databinding.ViewpagerResBinding
-import ren.imyan.kirby.ui.resources.ResListAdapter
 import ren.imyan.kirby.util.getLocalString
-import ren.imyan.ktx.toast
 
 class GameListActivity() : BaseUIActivity<ActivityGameListBinding, GameListViewModel>() {
 
@@ -36,15 +34,14 @@ class GameListActivity() : BaseUIActivity<ActivityGameListBinding, GameListViewM
     override fun initBinding(): ActivityGameListBinding =
         ActivityGameListBinding.inflate(layoutInflater)
 
+    override fun initToolbar(): Pair<Toolbar, *> = Pair(
+        binding.toolbarLayout.toolbar,
+        "${getLocalString(R.string.title_game_list)} ${viewModel.res.title}"
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initToolBar()
         initView()
-    }
-
-    private fun initToolBar() {
-        setSupportActionBar(binding.toolbarLayout.toolbar)
-        setToolBarTitle("${getLocalString(R.string.title_game_list)} ${viewModel.res.title}")
     }
 
     private fun initView() {

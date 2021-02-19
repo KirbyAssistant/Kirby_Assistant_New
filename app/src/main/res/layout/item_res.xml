@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="res"
+            type="ren.imyan.kirby.data.model.ResItem" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_marginBottom="@dimen/card_margin_vertical_big_activity"
         android:layout_marginEnd="@dimen/card_margin_horizontal_big_activity"
         android:layout_marginStart="@dimen/card_margin_horizontal_big_activity"
@@ -18,14 +25,14 @@
         app:cardElevation="0dp"
         app:cardBackgroundColor="?attr/color_view_background">
 
-    <ImageView
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/blur_image"
             android:transitionName="blur_image"
-            tools:ignore="ContentDescription"/>
+            tools:ignore="ContentDescription" />
 
-    <LinearLayout
+        <LinearLayout
             style="?android:attr/buttonBarButtonStyle"
             android:background="?attr/selectableItemBackground"
             android:orientation="horizontal"
@@ -35,19 +42,19 @@
             android:paddingBottom="16dp"
             android:paddingTop="16dp">
 
-        <ImageView
+            <ImageView
                 android:layout_width="158dp"
                 android:layout_height="158dp"
                 android:id="@+id/image"
                 android:scaleType="centerInside"
                 android:layout_gravity="center|start"
                 android:transitionName="image"
-                tools:ignore="ContentDescription"/>
+                tools:ignore="ContentDescription" />
 
-        <TextView
+            <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="Text"
+                android:text="@{res.title}"
                 android:layout_margin="8dp"
                 android:textSize="16sp"
                 android:id="@+id/name"
@@ -56,9 +63,10 @@
                 android:background="#20000000"
                 android:textColor="?attr/text_high"
                 android:padding="4dp"
-                tools:ignore="HardcodedText"/>
+                tools:ignore="HardcodedText" />
 
-    </LinearLayout>
+        </LinearLayout>
 
-</com.google.android.material.card.MaterialCardView>
+    </com.google.android.material.card.MaterialCardView>
+</layout>
 

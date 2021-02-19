@@ -9,6 +9,7 @@ import ren.imyan.kirby.databinding.ItemResBinding
  * @website https://imyan.ren
  */
 class ResViewHolder(itemResBinding: ItemResBinding) : RecyclerView.ViewHolder(itemResBinding.root) {
+    val binding = itemResBinding
     val itemRes = itemResBinding.root
     val linearLayout = itemResBinding.LinearLayout
     val name = itemResBinding.name

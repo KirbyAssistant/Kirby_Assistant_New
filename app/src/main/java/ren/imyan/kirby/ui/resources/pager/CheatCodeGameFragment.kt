@@ -10,10 +10,10 @@ import ren.imyan.kirby.ui.resources.ResViewModel
 
 /**
  * @author EndureBlaze/炎忍 https://github.com.EndureBlaze
- * @data 2021-01-28 0:16
+ * @data 2021-02-18 11:51
  * @website https://imyan.ren
  */
-class EmulatorFragment:BaseFragment<ViewpagerResBinding,ResViewModel>() {
+class CheatCodeGameFragment:BaseFragment<ViewpagerResBinding, ResViewModel>() {
 
     private val resFragment: ResFragment by lazy {
         requireParentFragment() as ResFragment
@@ -26,15 +26,14 @@ class EmulatorFragment:BaseFragment<ViewpagerResBinding,ResViewModel>() {
         ViewpagerResBinding.inflate(inflater)
 
     override fun initView() {
-
     }
 
     override fun loadDate() {
-        viewModel.emulatorListData.observe(this) {
+        viewModel.cheatCodeGameListData.observe(this) {
             resFragment.showListData(binding, it)
         }
-        viewModel.emulatorDataState.observe(this) {
-            resFragment.showErrorMessage(binding, it, "console")
+        viewModel.cheatCodeGameDataState.observe(this) {
+            resFragment.showErrorMessage(binding, it, "cheatcode")
         }
     }
 }

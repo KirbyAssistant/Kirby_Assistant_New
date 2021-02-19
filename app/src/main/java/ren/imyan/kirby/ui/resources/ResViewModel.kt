@@ -6,11 +6,11 @@ import androidx.lifecycle.ViewModel
 import ren.imyan.base.ActivityCollector
 import ren.imyan.kirby.R
 import ren.imyan.kirby.core.ServiceCreator
+import ren.imyan.kirby.data.model.CheatCodeGame
 import ren.imyan.kirby.data.model.Console
 import ren.imyan.kirby.data.model.Emulator
 import ren.imyan.kirby.data.model.ResItem
-import ren.imyan.kirby.data.retrofit.ConsoleService
-import ren.imyan.kirby.data.retrofit.EmulatorService
+import ren.imyan.kirby.data.retrofit.ResService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,28 +34,40 @@ class ResViewModel : ViewModel() {
     val emulatorListData: LiveData<List<ResItem>>
         get() = _emulatorListData
 
+    val cheatCodeGameListData: LiveData<List<ResItem>>
+        get() = _cheatCodeGameListData
+
     val consoleDataState: LiveData<String>
         get() = _consoleDataState
 
     val emulatorDataState: LiveData<String>
         get() = _emulatorDataState
 
+    val cheatCodeGameDataState: LiveData<String>
+        get() = _cheatCodeGameDataState
+
     private val _tabTitles: MutableList<String> by lazy { ArrayList() }
+
     private val _consoleListData = MutableLiveData<List<ResItem>>()
     private val _emulatorListData = MutableLiveData<List<ResItem>>()
+    private val _cheatCodeGameListData = MutableLiveData<List<ResItem>>()
+
     private val _consoleDataState = MutableLiveData<String>()
     private val _emulatorDataState = MutableLiveData<String>()
+    private val _cheatCodeGameDataState = MutableLiveData<String>()
 
     init {
         _tabTitles.addAll(loadTabTitles())
         getConsoleListData()
         getEmulatorListData()
+        getCheatCodeGameListData()
     }
 
     fun getAgainData(type: String) {
         when (type) {
             "console" -> getConsoleListData()
             "emulator" -> getEmulatorListData()
+            "cheatcode" -> getCheatCodeGameListData()
         }
     }
 
@@ -65,7 +77,7 @@ class ResViewModel : ViewModel() {
         )
 
     private fun getConsoleListData() {
-        val consoleService = ServiceCreator.create<ConsoleService>()
+        val consoleService = ServiceCreator.create<ResService>()
         consoleService.getConsoleData().enqueue(object : Callback<List<Console>> {
             override fun onResponse(call: Call<List<Console>>, response: Response<List<Console>>) {
                 response.body()?.let {
@@ -84,7 +96,7 @@ class ResViewModel : ViewModel() {
     }
 
     private fun getEmulatorListData() {
-        val emulatorService = ServiceCreator.create<EmulatorService>()
+        val emulatorService = ServiceCreator.create<ResService>()
         emulatorService.getEmulatorData().enqueue(object : Callback<List<Emulator>> {
             override fun onResponse(
                 call: Call<List<Emulator>>,
@@ -108,6 +120,28 @@ class ResViewModel : ViewModel() {
 
             override fun onFailure(call: Call<List<Emulator>>, t: Throwable) {
                 _emulatorDataState.value = t.message
+            }
+        })
+    }
+
+    private fun getCheatCodeGameListData() {
+        val cheatCodeGameService = ServiceCreator.create<ResService>()
+        cheatCodeGameService.getCheatCodeGameData().enqueue(object : Callback<List<CheatCodeGame>> {
+            override fun onResponse(
+                call: Call<List<CheatCodeGame>>,
+                response: Response<List<CheatCodeGame>>
+            ) {
+                response.body()?.let {
+                    val list = ArrayList<ResItem>()
+                    for (ele in it) {
+                        list.add(ResItem(ele.title, ele.image, ele.tag, "cheatcode"))
+                    }
+                    _cheatCodeGameListData.value = list
+                }
+            }
+
+            override fun onFailure(call: Call<List<CheatCodeGame>>, t: Throwable) {
+                _cheatCodeGameDataState.value = t.message
             }
         })
     }

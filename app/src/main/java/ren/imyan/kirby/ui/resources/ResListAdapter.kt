@@ -13,6 +13,7 @@ import ren.imyan.kirby.R
 import ren.imyan.kirby.data.model.ResItem
 import ren.imyan.kirby.databinding.ItemResBinding
 import ren.imyan.kirby.ui.ResViewHolder
+import ren.imyan.kirby.ui.cheatcode.CheatCodeActivity
 import ren.imyan.kirby.ui.game.GameListActivity
 
 class ResListAdapter(private val resList: List<ResItem>) :
@@ -41,21 +42,27 @@ class ResListAdapter(private val resList: List<ResItem>) :
         holder.name.animation = alphaAnimation
         holder.blurImage.animation = alphaAnimation
 
-        holder.name.text = res.title
+        holder.binding.res = res
+
         Glide.with(mContext!!)
             .load(res.imageUrl)
 //            .apply(Kirby.getGlideRequestOptions())
             .into(holder.image)
 
         if (res.type != "console") {
-            GlideCache.setBlurImageViaGlideCache(ActivityCollector.currActivity(), holder.blurImage, res.imageUrl, "8")
+            GlideCache.setBlurImageViaGlideCache(
+                ActivityCollector.currActivity(),
+                holder.blurImage,
+                res.imageUrl,
+                "8"
+            )
         }
 
         holder.linearLayout.setOnClickListener {
             when (res.type) {
-            "console" -> mContext?.let { GameListActivity.actionStart(it, res) }
-//            "cheatcode" -> CheatCodeActivity.actionStart(mContext!!, res.tag)
-        }
+                "console" -> mContext?.let { GameListActivity.actionStart(it, res) }
+                "cheatcode" -> mContext?.let { CheatCodeActivity.actionStart(it, res) }
+            }
         }
     }
 }
