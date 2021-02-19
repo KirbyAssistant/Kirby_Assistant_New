@@ -10,9 +10,6 @@ import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import cn.ednureblaze.glidecache.GlideCache
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.cache.DiskCache
-import com.bumptech.glide.load.engine.cache.SafeKeyGenerator
-import com.bumptech.glide.signature.EmptySignature
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.*
 import ren.imyan.base.ActivityCollector
@@ -23,8 +20,6 @@ import ren.imyan.kirby.databinding.ItemResBinding
 import ren.imyan.kirby.ui.ResViewHolder
 import ren.imyan.ktx.saveBitmap2Galley
 import ren.imyan.ktx.toast
-import java.io.File
-import java.io.IOException
 
 
 /**
@@ -83,33 +78,9 @@ class GameListAdapter(private val data: List<Game>) :
             versionList.add("保存封面图片")
             MaterialAlertDialogBuilder(currActivity)
                 .setTitle(R.string.game_download_game)
-                .setItems(versionList.toArray(arrayOfNulls<CharSequence>(versionList.size))) { _, which ->
+                .setItems(versionList.toArray(arrayOfNulls<CharSequence>(versionList.size))) { dialog, which ->
                     if (versionList[which] == versionList.last()) {
-                        (currActivity as GameListActivity).requestPermission.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        (currActivity as GameListActivity).requestPermissionState.observe(
-                            currActivity as GameListActivity
-                        ) {
-                            if (it) {
-                                CoroutineScope(Dispatchers.Main).launch {
-                                    val bitmap = async {
-                                        GlideCache.getGlideBitmap(currActivity, ele.image)
-                                    }
-                                    val state = currActivity.saveBitmap2Galley(
-                                            bitmap.await(),
-                                            "kirbyassistant",
-                                            ele.title
-                                        )
-
-                                    if (state.isOk) {
-                                        toast(currActivity, "保存成功，路径 ${state.path}")
-                                    } else {
-
-                                    }
-                                }
-                            } else {
-                                toast(currActivity, "未授予权限，无法保存")
-                            }
-                        }
+                        (currActivity as GameListActivity).saveImage(ele)
                     } else {
                         val intent = Intent(Intent.ACTION_VIEW)
                         intent.addCategory(Intent.CATEGORY_BROWSABLE)
@@ -117,6 +88,7 @@ class GameListAdapter(private val data: List<Game>) :
                             Uri.parse(ele.downloadLink[ele.downloadLink.keys.toList()[which]])
                         currActivity.startActivity(intent)
                     }
+                    dialog.dismiss()
                 }.show()
         }
     }

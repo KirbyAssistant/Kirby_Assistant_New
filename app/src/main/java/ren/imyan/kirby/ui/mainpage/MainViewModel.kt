@@ -3,6 +3,7 @@ package ren.imyan.kirby.ui.mainpage
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import ren.imyan.kirby.ui.resources.ResFragment
+import ren.imyan.kirby.ui.video.VideoFragment
 
 class MainViewModel : ViewModel() {
 
@@ -20,7 +21,7 @@ class MainViewModel : ViewModel() {
     private fun loadFragments(): ArrayList<Fragment> =
         arrayListOf(
             ResFragment(),
-            Fragment(),
+            VideoFragment(),
             Fragment()
         )
 }

@@ -1,15 +1,14 @@
 package ren.imyan.base
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.service.carrier.CarrierMessagingService
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import java.util.*
+import kotlin.collections.ArrayDeque
 
 /**
  * @author EndureBlaze/炎忍 https://github.com.EndureBlaze
@@ -17,19 +16,10 @@ import androidx.lifecycle.MutableLiveData
  * @website https://imyan.ren
  */
 open class BaseActivity : AppCompatActivity() {
-
-    lateinit var requestPermission: ActivityResultLauncher<String>
-    val requestPermissionState = MutableLiveData<Boolean>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ActivityCollector.addActivity(this)
         Log.d("BaseActivity", "This Activity is ${javaClass.simpleName}")
-
-        requestPermission =
-            registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
-                requestPermissionState.value = isGranted
-            }
     }
 
     override fun recreate() {
