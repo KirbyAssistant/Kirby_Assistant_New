@@ -9,12 +9,16 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import ren.imyan.base.BaseFragment
+import ren.imyan.kirby.core.currActivity
 import ren.imyan.kirby.data.model.ResItem
 import ren.imyan.kirby.databinding.FragmentResBinding
 import ren.imyan.kirby.databinding.ViewpagerResBinding
+import ren.imyan.kirby.ui.cheatcode.CheatCodeActivity
+import ren.imyan.kirby.ui.game.GameListActivity
 import ren.imyan.kirby.ui.resources.pager.CheatCodeGameFragment
 import ren.imyan.kirby.ui.resources.pager.ConsoleFragment
 import ren.imyan.kirby.ui.resources.pager.EmulatorFragment
+import ren.imyan.ktx.toast
 
 /**
  * @author EndureBlaze/炎忍 https://github.com.EndureBlaze
@@ -48,12 +52,6 @@ class ResFragment : BaseFragment<FragmentResBinding, ResViewModel>() {
     }
 
     override fun loadDate() {
-    }
-
-    fun showListData(binding: ViewpagerResBinding, data: List<ResItem>) {
-        binding.showDataList.layoutManager = GridLayoutManager(activity, 1)
-        binding.showDataList.adapter = ResListAdapter(data)
-        binding.loadBar.visibility = View.GONE
     }
 
     @SuppressLint("SetTextI18n")

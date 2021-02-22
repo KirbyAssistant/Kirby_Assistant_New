@@ -11,6 +11,7 @@ import android.view.ViewTreeObserver
 import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewbinding.ViewBinding
 import ren.imyan.base.BaseUIActivity
 import ren.imyan.base.startActivity
 import ren.imyan.kirby.R

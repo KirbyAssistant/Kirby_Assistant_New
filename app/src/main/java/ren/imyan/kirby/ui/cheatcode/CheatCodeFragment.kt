@@ -5,14 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import ren.imyan.base.BaseFragment
 import ren.imyan.kirby.data.model.CheatCode
-import ren.imyan.kirby.data.model.Game
-import ren.imyan.kirby.databinding.FragmentResBinding
 import ren.imyan.kirby.databinding.ViewpagerResBinding
-import ren.imyan.kirby.ui.game.GameListAdapter
 
 /**
  * @author EndureBlaze/炎忍 https://github.com.EndureBlaze

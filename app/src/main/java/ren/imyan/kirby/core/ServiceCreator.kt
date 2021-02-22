@@ -1,7 +1,11 @@
 package ren.imyan.kirby.core
 
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
+import java.util.concurrent.TimeUnit
 
 /**
  * @author EndureBlaze/炎忍 https://github.com.EndureBlaze
@@ -13,7 +17,7 @@ object ServiceCreator {
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(MoshiConverterFactory.create())
         .build()
 
     fun <T> create(serviceClass: Class<T>): T = retrofit.create(serviceClass)

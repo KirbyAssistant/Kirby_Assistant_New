@@ -6,9 +6,9 @@ import androidx.lifecycle.ViewModel
 import ren.imyan.base.ActivityCollector
 import ren.imyan.kirby.R
 import ren.imyan.kirby.core.ServiceCreator
-import ren.imyan.kirby.data.model.CheatCodeGame
-import ren.imyan.kirby.data.model.Console
-import ren.imyan.kirby.data.model.Emulator
+import ren.imyan.kirby.data.model.moshi.CheatCodeGame
+import ren.imyan.kirby.data.model.moshi.Console
+import ren.imyan.kirby.data.model.moshi.Emulator
 import ren.imyan.kirby.data.model.ResItem
 import ren.imyan.kirby.data.retrofit.ResService
 import retrofit2.Call

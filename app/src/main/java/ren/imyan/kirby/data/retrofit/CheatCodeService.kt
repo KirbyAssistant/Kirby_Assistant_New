@@ -1,7 +1,6 @@
 package ren.imyan.kirby.data.retrofit
 
 import ren.imyan.kirby.data.model.CheatCode
-import ren.imyan.kirby.data.model.Game
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

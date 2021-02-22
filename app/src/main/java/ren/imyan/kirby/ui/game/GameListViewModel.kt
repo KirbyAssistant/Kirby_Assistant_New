@@ -3,9 +3,8 @@ package ren.imyan.kirby.ui.game
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import ren.imyan.kirby.core.ServiceCreator
-import ren.imyan.kirby.data.model.Game
+import ren.imyan.kirby.data.model.moshi.Game
 import ren.imyan.kirby.data.model.ResItem
 import ren.imyan.kirby.data.retrofit.GameService
 import retrofit2.Call

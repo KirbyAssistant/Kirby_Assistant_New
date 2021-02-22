@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModelProvider
 import ren.imyan.base.BaseFragment
 import ren.imyan.kirby.databinding.ViewpagerResBinding
 import ren.imyan.kirby.ui.resources.ResFragment
+import ren.imyan.kirby.ui.resources.ResListAdapter
 import ren.imyan.kirby.ui.resources.ResViewModel
+import ren.imyan.kirby.util.showListData
 
 /**
  * @author EndureBlaze/炎忍 https://github.com.EndureBlaze
@@ -30,7 +32,7 @@ class CheatCodeGameFragment:BaseFragment<ViewpagerResBinding, ResViewModel>() {
 
     override fun loadDate() {
         viewModel.cheatCodeGameListData.observe(this) {
-            resFragment.showListData(binding, it)
+            binding.showListData(ResListAdapter(it))
         }
         viewModel.cheatCodeGameDataState.observe(this) {
             resFragment.showErrorMessage(binding, it, "cheatcode")

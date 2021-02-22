@@ -1,68 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="res"
             type="ren.imyan.kirby.data.model.ResItem" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_height="wrap_content"
+        android:id="@+id/cardview"
+        style="?android:attr/buttonBarButtonStyle"
         android:layout_width="match_parent"
-        android:layout_marginBottom="@dimen/card_margin_vertical_big_activity"
-        android:layout_marginEnd="@dimen/card_margin_horizontal_big_activity"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:layout_marginStart="@dimen/card_margin_horizontal_big_activity"
         android:layout_marginTop="@dimen/card_margin_vertical_big_activity"
-        android:foreground="?attr/selectableItemBackground"
+        android:layout_marginEnd="@dimen/card_margin_horizontal_big_activity"
+        android:layout_marginBottom="@dimen/card_margin_vertical_big_activity"
+        android:background="?attr/selectableItemBackground"
         android:transitionName="card"
-        android:id="@+id/cardview"
-        android:layout_margin="8dp"
-        app:strokeWidth="1dp"
-        app:strokeColor="@color/stroke_color"
+        app:cardBackgroundColor="?attr/color_view_background"
         app:cardElevation="0dp"
-        app:cardBackgroundColor="?attr/color_view_background">
+        app:strokeColor="@color/stroke_color"
+        app:strokeWidth="1dp">
 
         <ImageView
+            android:id="@+id/blur_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/blur_image"
             android:transitionName="blur_image"
             tools:ignore="ContentDescription" />
 
         <LinearLayout
+            android:id="@+id/LinearLayout"
             style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
             android:orientation="horizontal"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:id="@+id/LinearLayout"
+            android:paddingTop="16dp"
             android:paddingBottom="16dp"
-            android:paddingTop="16dp">
+            android:onClick="@{()->res.jump(res.type)}">
 
             <ImageView
+                android:id="@+id/image"
                 android:layout_width="158dp"
                 android:layout_height="158dp"
-                android:id="@+id/image"
-                android:scaleType="centerInside"
                 android:layout_gravity="center|start"
+                android:scaleType="centerInside"
                 android:transitionName="image"
                 tools:ignore="ContentDescription" />
 
             <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="@{res.title}"
-                android:layout_margin="8dp"
-                android:textSize="16sp"
                 android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center|end"
-                android:transitionName="name"
+                android:layout_margin="8dp"
                 android:background="#20000000"
-                android:textColor="?attr/text_high"
                 android:padding="4dp"
+                android:textColor="?attr/text_high"
+                android:textSize="16sp"
+                android:transitionName="name"
                 tools:ignore="HardcodedText" />
 
         </LinearLayout>

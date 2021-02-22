@@ -1,6 +1,6 @@
 package ren.imyan.kirby.data.retrofit
 
-import ren.imyan.kirby.data.model.Game
+import ren.imyan.kirby.data.model.moshi.Game
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

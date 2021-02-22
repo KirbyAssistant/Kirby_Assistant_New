@@ -1,68 +1,35 @@
 package ren.imyan.kirby.ui.resources
 
-import android.content.Context
-import android.view.LayoutInflater
-import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
 import android.view.animation.AnimationUtils
-import androidx.recyclerview.widget.RecyclerView
-import cn.ednureblaze.glidecache.GlideCache
 import com.bumptech.glide.Glide
-import ren.imyan.base.ActivityCollector
+import ren.imyan.base.BaseAdapter
 import ren.imyan.kirby.R
+import ren.imyan.kirby.RecyclerAnimation
 import ren.imyan.kirby.data.model.ResItem
 import ren.imyan.kirby.databinding.ItemResBinding
-import ren.imyan.kirby.ui.ResViewHolder
-import ren.imyan.kirby.ui.cheatcode.CheatCodeActivity
-import ren.imyan.kirby.ui.game.GameListActivity
 
-class ResListAdapter(private val resList: List<ResItem>) :
-    RecyclerView.Adapter<ResViewHolder>() {
+/**
+ * @author EndureBlaze/炎忍 https://github.com.EndureBlaze
+ * @data 2021-02-21 16:01
+ * @website https://imyan.ren
+ */
+class ResListAdapter(data:List<ResItem>):BaseAdapter<ResItem, ItemResBinding>(data.toMutableList(), R.layout.item_res) {
 
-    private var mContext: Context? = null
+    override fun bindItem(itemBinding: ItemResBinding, itemData: ResItem) {
+        itemBinding.root.startAnimation(RecyclerAnimation.itemAnimation)
+        itemBinding.image.animation = RecyclerAnimation.alphaAnimation
+        itemBinding.blurImage.animation = RecyclerAnimation.alphaAnimation
+        itemBinding.name.animation = RecyclerAnimation.alphaAnimation
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResViewHolder {
-        if (mContext == null) {
-            mContext = parent.context
-        }
-        val itemResBinding = ItemResBinding.inflate(LayoutInflater.from(mContext), parent, false)
-        return ResViewHolder(itemResBinding)
+        itemBinding.res = itemData
+        itemBinding.name.text = itemData.title
     }
 
-    override fun getItemCount(): Int = resList.size
-
-    override fun onBindViewHolder(holder: ResViewHolder, position: Int) {
-        val res = resList[position]
-        val animation = AnimationUtils.loadAnimation(mContext, R.anim.anim_recycler_item_show)
-        val alphaAnimation = AlphaAnimation(0.1f, 1.0f)
-        alphaAnimation.duration = 500
-
-        holder.itemRes.startAnimation(animation)
-        holder.image.animation = alphaAnimation
-        holder.name.animation = alphaAnimation
-        holder.blurImage.animation = alphaAnimation
-
-        holder.binding.res = res
-
-        Glide.with(mContext!!)
-            .load(res.imageUrl)
+    override fun bindAfterExecute(itemBinding: ItemResBinding, itemData: ResItem) {
+        Glide.with(context)
+            .load(itemData.imageUrl)
 //            .apply(Kirby.getGlideRequestOptions())
-            .into(holder.image)
-
-        if (res.type != "console") {
-            GlideCache.setBlurImageViaGlideCache(
-                ActivityCollector.currActivity(),
-                holder.blurImage,
-                res.imageUrl,
-                "8"
-            )
-        }
-
-        holder.linearLayout.setOnClickListener {
-            when (res.type) {
-                "console" -> mContext?.let { GameListActivity.actionStart(it, res) }
-                "cheatcode" -> mContext?.let { CheatCodeActivity.actionStart(it, res) }
-            }
-        }
+            .into(itemBinding.image)
     }
 }

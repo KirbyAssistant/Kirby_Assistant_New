@@ -1,11 +1,11 @@
- package ren.imyan.kirby.data.retrofit
+package ren.imyan.kirby.data.retrofit
 
-import ren.imyan.kirby.data.model.CheatCodeGame
-import ren.imyan.kirby.data.model.Console
-import ren.imyan.kirby.data.model.Emulator
+import ren.imyan.kirby.data.model.moshi.CheatCodeGame
+import ren.imyan.kirby.data.model.moshi.Console
+import ren.imyan.kirby.data.model.moshi.Emulator
+import ren.imyan.kirby.data.model.moshi.Video
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Path
 
 /**
  * @author EndureBlaze/炎忍 https://github.com.EndureBlaze
@@ -21,4 +21,7 @@ interface ResService {
 
     @GET("cheatcode.json")
     fun getCheatCodeGameData(): Call<List<CheatCodeGame>>
+
+    @GET("video.json")
+    fun getVideoData(): Call<List<Video>>
 }
