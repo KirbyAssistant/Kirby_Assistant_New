@@ -4,7 +4,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import androidx.databinding.BaseObservable
-import com.squareup.moshi.JsonClass
+import com.squareup.moshi.*
 import ren.imyan.base.ActivityCollector
 import ren.imyan.kirby.R
 import ren.imyan.kirby.util.getLocalString
@@ -16,7 +16,7 @@ import ren.imyan.ktx.toast
  * @website https://imyan.ren
  */
 @JsonClass(generateAdapter = true)
-data class CheatCode(val info: String, val code: String) : BaseObservable() {
+data class CheatCode(val info: String, val code: String) {
     fun copy(text: String) {
         val clipboardManager = ActivityCollector.currActivity()
             .getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
