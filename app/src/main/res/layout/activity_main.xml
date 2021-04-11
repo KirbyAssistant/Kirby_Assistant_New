@@ -4,57 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:consumeSystemWindowsInsets="start|end"
-    app:edgeToEdge="true"
-    app:fitsSystemWindowsInsets="start|end"
+    android:fitsSystemWindows="true"
     tools:context=".ui.mainpage.MainActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
-        style="@style/WidgetFoundation.Appbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:fitsSystemWindowsInsets="top">
-
-        <include
-            android:id="@+id/toolbar_layout"
-            layout="@layout/layout_toolbar" />
-
-    </com.google.android.material.appbar.AppBarLayout>
+    <include
+        android:id="@+id/layout_toolbar"
+        layout="@layout/layout_toolbar"
+        android:fitsSystemWindows="true" />
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/main_fragment_viewpager"
+        android:id="@+id/fragment_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/main_bottom_bar"
-        style="@style/WidgetFoundation.Card.Elevated"
-        android:layout_width="224dp"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginStart="@dimen/l1"
-        android:layout_marginEnd="@dimen/l1"
-        android:layout_marginBottom="@dimen/l1"
-        android:fitsSystemWindows="false"
-        app:layout_fitsSystemWindowsInsets="bottom"
-        tools:layout_marginBottom="64dp">
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/main_navigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:fitsSystemWindows="false"
-            android:paddingBottom="0dp"
-            android:textStyle="bold"
-            app:elevation="0dp"
-            app:fitsSystemWindowsInsets="start|end"
-            app:itemHorizontalTranslationEnabled="false"
-            app:itemRippleColor="?colorPrimary"
-            app:labelVisibilityMode="labeled"
-            app:menu="@menu/menu_bottom_nav" />
-    </com.google.android.material.card.MaterialCardView>
+        android:layout_gravity="bottom"
+        android:textStyle="bold"
+        app:itemRippleColor="?colorPrimary"
+        app:labelVisibilityMode="labeled"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+        app:menu="@menu/menu_bottom_nav" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

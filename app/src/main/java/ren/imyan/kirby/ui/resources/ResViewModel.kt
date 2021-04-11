@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import ren.imyan.base.ActivityCollector
 import ren.imyan.kirby.R
 import ren.imyan.kirby.core.ServiceCreator
+import ren.imyan.kirby.data.model.ConvertData
+import ren.imyan.kirby.data.model.MutableConvertData
 import ren.imyan.kirby.data.model.moshi.CheatCodeGame
 import ren.imyan.kirby.data.model.moshi.Console
 import ren.imyan.kirby.data.model.moshi.Emulator
@@ -28,33 +30,20 @@ class ResViewModel : ViewModel() {
     val tabTitles: List<String>
         get() = _tabTitles
 
-    val consoleListData: LiveData<List<ResItem>>
-        get() = _consoleListData
+    val consoleListData: ConvertData<List<ResItem>>
+        get() = _consoleListData.toImmutable()
 
-    val emulatorListData: LiveData<List<ResItem>>
-        get() = _emulatorListData
+    val emulatorListData: ConvertData<List<ResItem>>
+        get() = _emulatorListData.toImmutable()
 
-    val cheatCodeGameListData: LiveData<List<ResItem>>
-        get() = _cheatCodeGameListData
-
-    val consoleDataState: LiveData<String>
-        get() = _consoleDataState
-
-    val emulatorDataState: LiveData<String>
-        get() = _emulatorDataState
-
-    val cheatCodeGameDataState: LiveData<String>
-        get() = _cheatCodeGameDataState
+    val cheatCodeGameListData: ConvertData<List<ResItem>>
+        get() = _cheatCodeGameListData.toImmutable()
 
     private val _tabTitles: MutableList<String> by lazy { ArrayList() }
 
-    private val _consoleListData = MutableLiveData<List<ResItem>>()
-    private val _emulatorListData = MutableLiveData<List<ResItem>>()
-    private val _cheatCodeGameListData = MutableLiveData<List<ResItem>>()
-
-    private val _consoleDataState = MutableLiveData<String>()
-    private val _emulatorDataState = MutableLiveData<String>()
-    private val _cheatCodeGameDataState = MutableLiveData<String>()
+    private val _consoleListData = MutableConvertData<List<ResItem>>()
+    private val _emulatorListData = MutableConvertData<List<ResItem>>()
+    private val _cheatCodeGameListData = MutableConvertData<List<ResItem>>()
 
     init {
         _tabTitles.addAll(loadTabTitles())
@@ -85,12 +74,12 @@ class ResViewModel : ViewModel() {
                     for (ele in it) {
                         list.add(ResItem(ele.title, ele.image, ele.tag, "console"))
                     }
-                    _consoleListData.value = list
+                    _consoleListData.data.value = list
                 }
             }
 
             override fun onFailure(call: Call<List<Console>>, t: Throwable) {
-                _consoleDataState.value = t.message
+                _consoleListData.state.value = t.message
             }
         })
     }
@@ -114,12 +103,12 @@ class ResViewModel : ViewModel() {
                             )
                         )
                     }
-                    _emulatorListData.value = list
+                    _emulatorListData.data.value = list
                 }
             }
 
             override fun onFailure(call: Call<List<Emulator>>, t: Throwable) {
-                _emulatorDataState.value = t.message
+                _consoleListData.state.value = t.message
             }
         })
     }
@@ -136,12 +125,12 @@ class ResViewModel : ViewModel() {
                     for (ele in it) {
                         list.add(ResItem(ele.title, ele.image, ele.tag, "cheatcode"))
                     }
-                    _cheatCodeGameListData.value = list
+                    _cheatCodeGameListData.data.value = list
                 }
             }
 
             override fun onFailure(call: Call<List<CheatCodeGame>>, t: Throwable) {
-                _cheatCodeGameDataState.value = t.message
+                _consoleListData.state.value = t.message
             }
         })
     }

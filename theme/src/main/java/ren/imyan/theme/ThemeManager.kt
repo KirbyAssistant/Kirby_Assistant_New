@@ -74,6 +74,7 @@ class ThemeManager(context: Context) {
         for (theme in Theme.values()) {
             if (currThemeId == theme.themeId) {
                 themeContext.setTheme(theme.themeRes)
+                themeContext.applicationContext.setTheme(theme.themeRes)
             }
         }
     }

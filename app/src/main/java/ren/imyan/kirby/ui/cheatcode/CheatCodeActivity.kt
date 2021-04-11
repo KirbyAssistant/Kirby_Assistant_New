@@ -35,5 +35,5 @@ class CheatCodeActivity : BaseUIActivity<ActivityCheatcodeBinding, CheatCodeView
     )
 
     override fun initToolbar(): Pair<Toolbar, *> =
-        Pair(binding.toolbarLayout.toolbar, viewModel.game.title)
+        Pair(binding.layoutToolbar.toolbar, viewModel.game.title)
 }

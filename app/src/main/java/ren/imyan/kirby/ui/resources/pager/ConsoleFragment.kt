@@ -8,6 +8,7 @@ import ren.imyan.kirby.databinding.ViewpagerResBinding
 import ren.imyan.kirby.ui.resources.ResFragment
 import ren.imyan.kirby.ui.resources.ResListAdapter
 import ren.imyan.kirby.ui.resources.ResViewModel
+import ren.imyan.kirby.util.showErrorMessage
 import ren.imyan.kirby.util.showListData
 
 /**
@@ -32,13 +33,11 @@ class ConsoleFragment : BaseFragment<ViewpagerResBinding, ResViewModel>() {
     }
 
     override fun loadDate() {
-        viewModel.consoleListData.observe(this) {
-//            resFragment.showListData(binding, it)
+        viewModel.consoleListData.data.observe(this) {
             binding.showListData(ResListAdapter(it))
-
         }
-        viewModel.consoleDataState.observe(this) {
-            resFragment.showErrorMessage(binding, it, "console")
+        viewModel.consoleListData.state.observe(this) {
+            binding.showErrorMessage(it, "console", viewModel)
         }
     }
 }

@@ -10,13 +10,15 @@ import android.view.View
 import android.view.ViewTreeObserver
 import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.view.updatePadding
 import androidx.lifecycle.ViewModelProvider
-import androidx.viewbinding.ViewBinding
 import ren.imyan.base.BaseUIActivity
 import ren.imyan.base.startActivity
 import ren.imyan.kirby.R
 import ren.imyan.kirby.databinding.ActivityMainBinding
 import ren.imyan.kirby.util.HideableBehavior
+import ren.imyan.base.util.QMUIDisplayHelper
+import ren.imyan.kirby.ui.setting.SettingActivity
 
 class MainActivity : BaseUIActivity<ActivityMainBinding, MainViewModel>() {
 
@@ -33,22 +35,46 @@ class MainActivity : BaseUIActivity<ActivityMainBinding, MainViewModel>() {
         ActivityMainBinding.inflate(layoutInflater)
 
 
-    override fun initToolbar(): Pair<Toolbar, *> = Pair(binding.toolbarLayout.toolbar,R.string.app_name)
+    override fun initToolbar(): Pair<Toolbar, *> =
+        Pair(binding.layoutToolbar.toolbar, R.string.app_name)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initFragmentPager()
-        requestNavigationHidden()
+        initBottomBar()
+        binding.layoutToolbar.toolbar.elevation = 0f
+        setSupportActionBar(binding.layoutToolbar.toolbar)
     }
 
     private fun initFragmentPager() {
-        binding.mainFragmentViewpager.adapter = ViewPagerAdapter(
-            supportFragmentManager,
-            lifecycle,
-            viewModel.fragmentList
-        )
-        binding.mainFragmentViewpager.isUserInputEnabled = false
-        binding.mainFragmentViewpager.offscreenPageLimit = 3
+        binding.fragmentViewpager.apply {
+            adapter = ViewPagerAdapter(
+                supportFragmentManager,
+                lifecycle,
+                viewModel.fragmentList
+            )
+            isUserInputEnabled = false
+            offscreenPageLimit = 3
+        }
+    }
+
+    private fun initBottomBar() {
+        binding.navigation.setOnNavigationItemSelectedListener {
+            binding.fragmentViewpager.currentItem = when (it.itemId) {
+                R.id.res -> {
+                    binding.layoutToolbar.toolbar.elevation = 0f
+                    0
+                }
+                R.id.video ->
+                {
+                    binding.layoutToolbar.toolbar.elevation = 4f
+                    1
+                }
+                else -> 0
+            }
+
+            return@setOnNavigationItemSelectedListener true
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -59,6 +85,7 @@ class MainActivity : BaseUIActivity<ActivityMainBinding, MainViewModel>() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.theme -> getThemeManager().showSwitchDialog(::reloadMain)
+            R.id.setting -> startActivity<SettingActivity>(this)
         }
         return true
     }
@@ -72,46 +99,5 @@ class MainActivity : BaseUIActivity<ActivityMainBinding, MainViewModel>() {
         startActivity(reloadMain)
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         finish()
-    }
-
-    @Suppress("UNCHECKED_CAST")
-    internal fun requestNavigationHidden(hide: Boolean = true) {
-        val topView = binding.appBar
-        val bottomView = binding.mainBottomBar
-
-        if (
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT &&
-            !binding.mainBottomBar.isAttachedToWindow
-        ) {
-            binding.mainBottomBar.viewTreeObserver.addOnWindowAttachListener(object :
-                ViewTreeObserver.OnWindowAttachListener {
-
-                init {
-                    val listener =
-                        binding.mainBottomBar.tag as? ViewTreeObserver.OnWindowAttachListener
-                    if (listener != null) {
-                        binding.mainBottomBar.viewTreeObserver.removeOnWindowAttachListener(listener)
-                    }
-                    binding.mainBottomBar.tag = this
-                }
-
-                override fun onWindowAttached() {
-                    requestNavigationHidden(hide)
-                }
-
-                override fun onWindowDetached() {
-                }
-            })
-            return
-        }
-
-        val topParams = topView.layoutParams as? CoordinatorLayout.LayoutParams
-        val bottomParams = bottomView.layoutParams as? CoordinatorLayout.LayoutParams
-
-        val topBehavior = topParams?.behavior as? HideableBehavior<View>
-        val bottomBehavior = bottomParams?.behavior as? HideableBehavior<View>
-
-        topBehavior?.setHidden(topView, hide = false, lockState = false)
-        bottomBehavior?.setHidden(bottomView, hide, hide)
     }
 }

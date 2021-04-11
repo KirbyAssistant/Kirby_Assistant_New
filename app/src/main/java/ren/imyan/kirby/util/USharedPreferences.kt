@@ -20,7 +20,6 @@ class SP<T>(private val key: String, private val defValue: Any) {
         fun boolean(key: String, defValue: Boolean): SP<Boolean> = SP(key, defValue)
     }
 
-
     private val sharedPreferences: SharedPreferences by lazy {
         App.appContext.getSharedPreferences(
             "share_data",

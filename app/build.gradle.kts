@@ -9,17 +9,14 @@ plugins {
 }
 
 android {
-    compileSdkVersion(30)
-    buildToolsVersion("30.0.3")
     defaultConfig {
         applicationId = "ren.imyan.kirby"
-        minSdkVersion(21)
-        targetSdkVersion(30)
         versionCode = 1
         versionName = "1.0"
         vectorDrawables.useSupportLibrary = true
         vectorDrawables.generatedDensities("mdpi", "hdpi", "xhdpi", "xxhdpi")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        flavorDimensions("version")
     }
 
     buildTypes {
@@ -27,12 +24,15 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
-        }
-    }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+            applicationVariants.all {
+                outputs.all {
+                    if (this is com.android.build.gradle.internal.api.ApkVariantOutputImpl) {
+                        this.outputFileName = "$flavorName@_v$versionName.apk"
+                    }
+                }
+            }
+        }
     }
 
     buildFeatures {
@@ -43,6 +43,14 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    productFlavors {
+        create("先行测试")
+    }
+
+    productFlavors.all {
+        manifestPlaceholders["CHANNEL_VALUE"] = name
+    }
 }
 
 dependencies {
@@ -51,12 +59,13 @@ dependencies {
 
     // Android X & Jetpack
     implementation("androidx.core:core-ktx:1.3.2")
-    implementation("androidx.appcompat:appcompat:1.3.0-beta01")
+    implementation("androidx.appcompat:appcompat:1.3.0-rc01")
     implementation("com.google.android.material:material:1.3.0")
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.0")
-    implementation("androidx.activity:activity-ktx:1.2.0")
-    implementation("androidx.fragment:fragment-ktx:1.3.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
+    implementation("androidx.activity:activity-ktx:1.2.2")
+    implementation("androidx.fragment:fragment-ktx:1.3.2")
+    implementation("androidx.preference:preference-ktx:1.1.1")
 
     // NetWork
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
@@ -69,16 +78,16 @@ dependencies {
     // Utils
     implementation("com.oasisfeng.condom:library:2.5.0")
     implementation("com.github.bumptech.glide:glide:4.11.0")
-    annotationProcessor ("com.github.bumptech.glide:compiler:4.11.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.11.0")
     implementation("com.github.EndureBlaze:GlideCache:1.2")
 
     // Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3")
 
     implementation("cn.bmob.android:bmob-sdk:3.7.9")
 
-    testImplementation("junit:junit:4.13.1")
+    testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
     implementation(project(":base"))

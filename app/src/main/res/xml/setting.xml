@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Preference
+            android:key="version"
+            android:summary="[!!!NOT FORMATTED!!!]"
+            android:title="@string/setting_version_title"
+            android:icon="@mipmap/ic_launcher"/>
+
+    <androidx.preference.PreferenceCategory android:title="@string/setting_title">
+
+        <Preference
+                android:key="setLanguage"
+                android:title="@string/setting_language_title" />
+
+        <!--SwitchPreference
+                android:key="autoDarkMode"
+                android:title="@string/setting_language_title" /!-->
+
+        <Preference
+                android:key="apkCacheClean"
+                android:summary="[!!!NOT FORMATTED!!!]"
+                android:title="@string/setting_apk_cache_clean_title"/>
+
+        <Preference
+                android:key="imageCacheClean"
+                android:summary="[!!!NOT FORMATTED!!!]"
+                android:title="@string/setting_image_cache_clean_title"/>
+
+    </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory android:title="@string/setting_about_title">
+
+        <Preference
+                android:key="star"
+                android:summary="@string/setting_about_star_summary"
+                android:title="@string/setting_about_star_title" />
+        <Preference
+                android:key="faq"
+                android:summary="@string/setting_about_faq_summary"
+                android:title="@string/setting_about_faq_title" />
+        <Preference
+                android:key="qq_group"
+                android:summary="@string/setting_about_feedback_summary"
+                android:title="@string/setting_about_feedback_title" />
+
+        <Preference
+                android:key="tg_channel"
+                android:summary="@string/setting_about_tg_summary"
+                android:title="@string/setting_about_tg_title" />
+
+        <Preference
+                android:key="github"
+                android:title="@string/setting_about_github_title" />
+
+    </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory android:title="@string/setting_dev_title">
+
+        <Preference
+                android:key="dev_coolapk"
+                android:title="@string/setting_dev_coolapk_title" />
+
+        <Preference
+                android:key="dev_github"
+                android:title="@string/setting_dev_github_title" />
+
+        <Preference
+                android:key="dev_weibo"
+                android:title="@string/setting_dev_weibo_title" />
+
+        <Preference
+                android:key="dev_twitter"
+                android:title="@string/setting_dev_twitter_title" />
+
+    </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory android:title="@string/setting_contributor_title">
+
+        <Preference
+                android:key="domain_name"
+                android:summary="@string/setting_contributor_domain_name_summary"
+                android:title="@string/setting_contributor_domain_name_title"/>
+
+        <Preference
+                android:key="program"
+                android:summary="@string/setting_contributor_program_summary"
+                android:title="@string/setting_contributor_program_title"/>
+
+        <Preference
+                android:key="translation_tw"
+                android:summary="@string/setting_contributor_translation_tw_summary"
+                android:title="@string/setting_contributor_translation_tw_title" />
+
+        <Preference
+                android:key="translation_en_1"
+                android:summary="@string/setting_contributor_translation_en_1_summary"
+                android:title="@string/setting_contributor_translation_en_title" />
+
+        <Preference
+                android:key="translation_en_2"
+                android:summary="@string/setting_contributor_translation_en_2_summary"
+                android:title="@string/setting_contributor_translation_en_title" />
+
+        <Preference
+                android:key="draw_icon_1"
+                android:summary="@string/setting_contributor_draw_icon_1_summary"
+                android:title="@string/setting_contributor_draw_icon_title" />
+
+        <Preference
+                android:key="draw_icon_2"
+                android:summary="@string/setting_contributor_draw_icon_2_summary"
+                android:title="@string/setting_contributor_draw_icon_title" />
+
+        <Preference
+                android:key="draw_icon_3"
+                android:summary="@string/setting_contributor_draw_icon_3_summary"
+                android:title="@string/setting_contributor_draw_icon_title" />
+
+        <Preference
+                android:key="video_author"
+                android:summary="@string/setting_contributor_video_author_summary"
+                android:title="@string/setting_contributor_video_author_title" />
+
+        <Preference
+                android:key="writer_help_faq"
+                android:summary="@string/setting_contributor_writer_help_faq_summary"
+                android:title="@string/setting_contributor_writer_help_faq_title" />
+
+    </androidx.preference.PreferenceCategory>
+
+</androidx.preference.PreferenceScreen>

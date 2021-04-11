@@ -8,19 +8,19 @@
     android:orientation="vertical">
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/main_res_tablayout"
+        android:id="@+id/tablayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?color_view_background"
+        android:background="?attr/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat"
-        app:elevation="1dp"
+        app:elevation="4dp"
         app:tabIndicatorColor="?colorAccent"
         app:tabIndicatorHeight="2dp"
         app:tabSelectedTextColor="?colorAccent"
         app:tabTextColor="#FFB5B5B5" />
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/main_res_viewpager"
+        android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

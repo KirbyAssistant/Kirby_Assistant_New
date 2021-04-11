@@ -8,6 +8,7 @@ import ren.imyan.kirby.databinding.ViewpagerResBinding
 import ren.imyan.kirby.ui.resources.ResFragment
 import ren.imyan.kirby.ui.resources.ResListAdapter
 import ren.imyan.kirby.ui.resources.ResViewModel
+import ren.imyan.kirby.util.showErrorMessage
 import ren.imyan.kirby.util.showListData
 
 /**
@@ -15,11 +16,7 @@ import ren.imyan.kirby.util.showListData
  * @data 2021-01-28 0:16
  * @website https://imyan.ren
  */
-class EmulatorFragment:BaseFragment<ViewpagerResBinding,ResViewModel>() {
-
-    private val resFragment: ResFragment by lazy {
-        requireParentFragment() as ResFragment
-    }
+class EmulatorFragment : BaseFragment<ViewpagerResBinding, ResViewModel>() {
 
     override fun initViewModel(): ResViewModel =
         ViewModelProvider(requireParentFragment())[ResViewModel::class.java]
@@ -32,11 +29,11 @@ class EmulatorFragment:BaseFragment<ViewpagerResBinding,ResViewModel>() {
     }
 
     override fun loadDate() {
-        viewModel.emulatorListData.observe(this) {
+        viewModel.emulatorListData.data.observe(this) {
             binding.showListData(ResListAdapter(it))
         }
-        viewModel.emulatorDataState.observe(this) {
-            resFragment.showErrorMessage(binding, it, "console")
+        viewModel.emulatorListData.state.observe(this) {
+            binding.showErrorMessage(it, "console", viewModel)
         }
     }
 }

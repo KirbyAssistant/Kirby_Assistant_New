@@ -52,7 +52,7 @@ class GameListActivity() : BaseUIActivity<ActivityGameListBinding, GameListViewM
         ActivityGameListBinding.inflate(layoutInflater)
 
     override fun initToolbar(): Pair<Toolbar, *> = Pair(
-        binding.toolbarLayout.toolbar,
+        binding.layoutToolbar.toolbar,
         "${getLocalString(R.string.title_game_list)} ${viewModel.res.title}"
     )
 
@@ -75,7 +75,7 @@ class GameListActivity() : BaseUIActivity<ActivityGameListBinding, GameListViewM
                     if (state.isOk) {
                         toast(currActivity, "保存成功，路径 ${state.path}")
                     } else {
-
+                        toast(currActivity, "保存失败")
                     }
                 }
             } else {

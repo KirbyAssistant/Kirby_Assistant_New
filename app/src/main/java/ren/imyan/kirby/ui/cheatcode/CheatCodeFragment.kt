@@ -28,10 +28,10 @@ class CheatCodeFragment : BaseFragment<ViewpagerResBinding, CheatCodeViewModel>(
     }
 
     override fun loadDate() {
-        viewModel.cheatCodeData.observe(this) {
+        viewModel.cheatCodeListData.data.observe(this) {
             showListData(it)
         }
-        viewModel.cheatCodeDataState.observe(this) {
+        viewModel.cheatCodeListData.state.observe(this) {
             showErrorMessage(
                 it, viewModel.game.tag
             )

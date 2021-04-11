@@ -21,6 +21,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Kirby_Assistant_New">
         <activity android:name=".ui.game.GameListActivity" />
+        <activity android:name=".ui.setting.SettingActivity" />
         <activity android:name=".ui.cheatcode.CheatCodeActivity" />
         <activity android:name=".ui.mainpage.MainActivity">
             <intent-filter>
@@ -29,6 +30,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="CHANNEL"
+            android:value="${CHANNEL_VALUE}"/>
     </application>
 
 </manifest>

@@ -18,6 +18,7 @@ abstract class BaseAdapter<T, B : ViewDataBinding>(
     private var dataList: MutableList<T>,
     private var layoutRes: Int
 ) : RecyclerView.Adapter<BaseAdapter<T, B>.ViewHolder>() {
+
     private var itemClickListener: ((itemData: T, itemBinding: B) -> Unit)? = null
     private var isLoading = false
     lateinit var context: Context

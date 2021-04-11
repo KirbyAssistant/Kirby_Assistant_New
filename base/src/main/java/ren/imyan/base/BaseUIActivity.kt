@@ -1,8 +1,12 @@
 package ren.imyan.base
 
 import android.content.Context
+import android.content.res.Resources
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.view.WindowInsets
 import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.Toolbar
@@ -53,7 +57,6 @@ abstract class BaseUIActivity<viewBinding : ViewBinding, viewModel : ViewModel> 
 //                        or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
 //                        or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION)
 //            }
-//
 //            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 //                window?.decorView?.post {
 //                    if (window.decorView.rootWindowInsets?.systemWindowInsetBottom ?: 0 < Resources.getSystem().displayMetrics.density * 40) {

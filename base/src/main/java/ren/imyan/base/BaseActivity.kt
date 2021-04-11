@@ -1,14 +1,16 @@
 package ren.imyan.base
 
+import android.content.Context
 import android.content.Intent
+import android.graphics.Point
 import android.os.Bundle
-import android.service.carrier.CarrierMessagingService
+import android.util.DisplayMetrics
 import android.util.Log
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
+import android.view.Display
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import java.util.*
-import kotlin.collections.ArrayDeque
+import java.lang.reflect.Method
+
 
 /**
  * @author EndureBlaze/炎忍 https://github.com.EndureBlaze

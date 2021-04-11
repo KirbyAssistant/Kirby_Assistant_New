@@ -6,16 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.game.GameListActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/app_bar">
-
-        <include
-            android:id="@+id/toolbar_layout"
-            layout="@layout/layout_toolbar"/>
-
-    </com.google.android.material.appbar.AppBarLayout>
+    <include
+        android:id="@+id/layout_toolbar"
+        layout="@layout/layout_toolbar"/>
 
 
     <ProgressBar

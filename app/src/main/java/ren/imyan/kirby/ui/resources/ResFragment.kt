@@ -35,9 +35,9 @@ class ResFragment : BaseFragment<FragmentResBinding, ResViewModel>() {
     ): FragmentResBinding = FragmentResBinding.inflate(inflater, container, false)
 
     override fun initView() {
-        binding.mainResTablayout.tabMode = TabLayout.MODE_FIXED
+        binding.tablayout.tabMode = TabLayout.MODE_FIXED
 
-        binding.mainResViewpager.adapter = ResPagerAdapter(
+        binding.viewpager.adapter = ResPagerAdapter(
             this,
             listOf(
                 ConsoleFragment(),
@@ -46,23 +46,11 @@ class ResFragment : BaseFragment<FragmentResBinding, ResViewModel>() {
             )
         )
 
-        TabLayoutMediator(binding.mainResTablayout, binding.mainResViewpager) { tab, position ->
+        TabLayoutMediator(binding.tablayout, binding.viewpager) { tab, position ->
             tab.text = viewModel.tabTitles[position]
         }.attach()
     }
 
     override fun loadDate() {
-    }
-
-    @SuppressLint("SetTextI18n")
-    fun showErrorMessage(binding: ViewpagerResBinding, error: String, type: String) {
-        binding.loadBar.visibility = View.GONE
-        binding.errMsg.visibility = View.VISIBLE
-        binding.errMsg.text = "$error\n请点击重试或截图告知开发者"
-        binding.root.setOnClickListener {
-            binding.errMsg.visibility = View.GONE
-            binding.loadBar.visibility = View.VISIBLE
-            viewModel.getAgainData(type)
-        }
     }
 }
