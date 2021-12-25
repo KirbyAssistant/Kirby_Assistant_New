@@ -27,13 +27,13 @@ class EmulatorFragment : BaseFragment(R.layout.fragment_only_list) {
     private val adapter by lazy {
         EmulatorAdapter().apply {
 //            addHeaderView(get(named("statusBarPadding")))
-            setOnItemChildClickListener { _, _, _ ->
+            setOnItemClickListener { _, _, _ ->
                 MaterialAlertDialogBuilder(requireActivity())
-                    .setTitle("很抱歉！这部分的资源出了些问题，请点击下方的选项暂时跳转到网盘下载，提取密码为 kirby")
-                    .setItems(arrayOf("手机模拟器","电脑模拟器")) { dialog, which ->
+                    .setTitle("很抱歉！这部分的资源出了些问题")
+                    .setItems(arrayOf("请点击下方的选项暂时跳转到网盘下载，提取密码为 kirby","手机模拟器","电脑模拟器")) { dialog, which ->
                         Intent(Intent.ACTION_VIEW).apply {
                             addCategory(Intent.CATEGORY_BROWSABLE)
-                            data = Uri.parse(if(which == 0) "https://wwe.lanzouo.com/b01uucqgb" else "https://wwe.lanzouo.com/b01uucqid" )
+                            data = Uri.parse(if(which == 1) "https://wwe.lanzouo.com/b01uucqgb" else "https://wwe.lanzouo.com/b01uucqid" )
                             startActivity(this)
                         }
                         dialog.dismiss()

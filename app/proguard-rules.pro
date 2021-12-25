@@ -1,3 +1,8 @@
+
+-obfuscationdictionary pro-android.txt
+-classobfuscationdictionary pro-android.txt
+-packageobfuscationdictionary pro-android.txt
+
 #指定代码的压缩级别
 -optimizationpasses 5
 #不混合大小写
